@@ -4,11 +4,11 @@
   <img src="https://img.shields.io/badge/Laravel-11-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 11">
   <img src="https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS">
   <img src="https://img.shields.io/badge/Alpine.js-3-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=white" alt="Alpine.js">
-  <img src="https://img.shields.io/badge/Gemini-1.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Gemini AI">
+  <img src="https://img.shields.io/badge/Gemini-3.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Gemini AI">
 </p>
 
-A role-based web application for university course schedule management. Students upload their timetable files and receive instant AI-powered conflict analysis powered by **Google Gemini 1.5 Flash**.
-
+A role-based web application for university course schedule management. Students upload their timetable files and receive instant AI-powered conflict analysis powered by **Google Gemini 3.5 Flash**.
+  
 ---
 
 ## Features

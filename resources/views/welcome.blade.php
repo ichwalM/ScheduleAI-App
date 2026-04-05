@@ -41,31 +41,36 @@
 
 {{-- ═══════════════════════════════ HERO ═══════════════════════════════ --}}
 <header class="border-b-2 border-slate-900 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
-        <div>
+    <div class="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
+        {{-- Left: Text --}}
+        <div class="min-w-0 overflow-hidden">
             <div class="inline-block bg-blue-600 text-white px-4 py-1 text-xs font-bold uppercase tracking-widest mb-8">
                 Project Profile v1.0
             </div>
-            <h1 class="editorial-title text-7xl md:text-9xl font-black text-slate-900 mb-10">
+            <h1 class="editorial-title font-black text-slate-900 mb-10" style="font-size: clamp(2.5rem, 6vw, 5rem); line-height: 0.9; letter-spacing: -0.04em;">
                 TRANSFORMING<br>
                 <span class="blue-accent">ACADEMIC</span><br>
                 SYSTEMS.
             </h1>
-            <p class="text-xl text-slate-600 max-w-lg mb-12 leading-relaxed">
+            <p class="text-base text-slate-600 max-w-md mb-12 leading-relaxed">
                 ScheduleAI bukan sekadar alat manajemen waktu. Ini adalah sistem dokumentasi cerdas yang menggabungkan Google Gemini AI dengan struktur data relasional untuk efisiensi universitas.
             </p>
             <div class="flex flex-wrap gap-4">
-                <a href="{{ route('register') }}" class="px-10 py-5 bg-slate-900 text-white font-bold uppercase tracking-widest hover:bg-blue-700 transition-all">
+                <a href="{{ route('register') }}" class="px-10 py-5 bg-slate-900 text-white font-bold uppercase tracking-widest text-xs hover:bg-blue-700 transition-all">
                     Start Your Profile
+                </a>
+                <a href="{{ route('login') }}" class="px-10 py-5 border-2 border-slate-900 text-slate-900 font-bold uppercase tracking-widest text-xs hover:bg-slate-900 hover:text-white transition-all">
+                    Sign In
                 </a>
             </div>
         </div>
-        <div class="relative">
-            <div class="border-2 border-slate-900 p-2 bg-white">
-                <img src="{{ asset('images/doc_student.jpg') }}" alt="Student Documentation" class="w-full grayscale hover:grayscale-0 transition-all duration-700">
+        {{-- Right: Image --}}
+        <div class="relative min-w-0">
+            <div class="border-2 border-slate-900 p-2 bg-white shadow-[8px_8px_0px_#0f172a]">
+                <img src="{{ asset('images/doc_student.jpg') }}" alt="Student Documentation" class="w-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
             </div>
-            <div class="absolute -bottom-10 -left-10 w-48 h-48 border-2 border-slate-900 bg-blue-600 hidden md:flex items-center justify-center p-6 text-white">
-                <p class="text-xs font-bold uppercase leading-tight">Dokumentasi Penggunaan Nyata di Kampus</p>
+            <div class="absolute -bottom-8 -left-8 w-40 h-40 border-2 border-slate-900 bg-blue-600 hidden lg:flex items-center justify-center p-6 text-white">
+                <p class="text-[10px] font-bold uppercase leading-tight">Dokumentasi Penggunaan Nyata di Kampus</p>
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Schedule;
 use App\Models\ScheduleCourse;
+use App\Models\ScheduleExternalActivity;
 use App\Services\GeminiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,28 +17,28 @@ class StudentController extends Controller
 
     public function dashboard()
     {
-        // Strictly one schedule per student – get it (any status)
-        $schedule = auth()->user()
+        // Load all schedules for the student to support multiple files
+        $schedules = auth()->user()
             ->schedules()
-            ->with(['courses', 'conflicts', 'recommendations'])
+            ->with(['courses', 'conflicts', 'recommendations', 'activities'])
             ->latest()
-            ->first();
+            ->get();
 
-        return view('dashboard.student', compact('schedule'));
+        // Standard schedule for head analytics (still helpful as latest)
+        $latestSchedule = $schedules->first();
+        
+        // Items and Conflicts
+        $allItems         = auth()->user()->getAllItems();
+        $globalConflicts  = auth()->user()->global_conflicts;
+
+        return view('dashboard.student', compact('schedules', 'latestSchedule', 'allItems', 'globalConflicts'));
     }
 
     /* ─── Upload form ─── */
 
     public function uploadForm()
     {
-        // Block access if a schedule already exists
-        $existing = auth()->user()->schedules()->latest()->first();
-
-        if ($existing) {
-            return redirect()->route('student.dashboard')
-                ->with('warning', 'Kamu sudah memiliki jadwal. Hapus jadwal yang ada terlebih dahulu sebelum mengunggah yang baru.');
-        }
-
+        // Allow multiple uploads now
         return view('student.upload');
     }
 
@@ -45,12 +46,7 @@ class StudentController extends Controller
 
     public function upload(Request $request)
     {
-        // Double-check: block if already has a schedule
-        if (auth()->user()->schedules()->exists()) {
-            return redirect()->route('student.dashboard')
-                ->with('warning', 'Kamu sudah memiliki jadwal. Hapus jadwal yang ada terlebih dahulu sebelum mengunggah yang baru.');
-        }
-
+        // Allow multiple uploads now
         $request->validate([
             'schedule_file' => ['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:10240'],
         ]);
@@ -132,6 +128,27 @@ class StudentController extends Controller
         $schedule->load(['courses', 'conflicts', 'recommendations']);
 
         return view('student.schedule-show', compact('schedule'));
+    }
+
+    /* ─── Master Mata Kuliah Index ─── */
+
+    public function indexCourses()
+    {
+        $user      = auth()->user();
+        $schedules = $user->schedules()->with('courses')->latest()->get();
+        $allCourses = $user->allCourses()->with('schedule')->orderByRaw("FIELD(day,'SENIN','SELASA','RABU','KAMIS','JUMAT','SABTU','MINGGU')")->orderBy('time_start')->get();
+
+        $dayOrder = ['SENIN','SELASA','RABU','KAMIS','JUMAT','SABTU','MINGGU'];
+        $grouped  = [];
+        foreach ($dayOrder as $d) {
+            $dayItems = $allCourses->filter(fn($c) => strtoupper($c->day) === $d);
+            if ($dayItems->isNotEmpty()) $grouped[$d] = $dayItems;
+        }
+
+        $totalCredits  = $allCourses->sum('credits');
+        $globalConflicts = $user->global_conflicts;
+
+        return view('student.courses.index', compact('schedules', 'allCourses', 'grouped', 'totalCredits', 'globalConflicts', 'dayOrder'));
     }
 
     /* ─── Edit schedule info (student/semester/advisor/period) ─── */
@@ -262,5 +279,93 @@ class StudentController extends Controller
 
         return redirect()->route('student.dashboard')
             ->with('success', 'Jadwal berhasil dihapus. Kamu sekarang bisa mengunggah jadwal baru.');
+    }
+
+    /* ─── External Activities (Jobs/Freelance) ─── */
+
+    public function indexActivities()
+    {
+        $schedule = auth()->user()->schedules()->latest()->with('activities')->first();
+
+        if (!$schedule) {
+            return redirect()->route('student.upload')
+                ->with('warning', 'Silakan unggah jadwal kuliah terlebih dahulu untuk mengelola agenda pekerjaan/freelance.');
+        }
+
+        $activities = $schedule->activities;
+        return view('student.activities.index', compact('schedule', 'activities'));
+    }
+
+    public function createActivity()
+    {
+        $schedule = auth()->user()->schedules()->latest()->first();
+
+        if (!$schedule) {
+            return redirect()->route('student.upload')
+                ->with('warning', 'Silakan unggah jadwal kuliah terlebih dahulu.');
+        }
+
+        return view('student.activities.create', compact('schedule'));
+    }
+
+    public function storeActivity(Request $request)
+    {
+        $schedule = auth()->user()->schedules()->latest()->first();
+        abort_if(!$schedule, 404);
+
+        $validated = $request->validate([
+            'type'        => 'required|string|max:50',
+            'title'       => 'required|string|max:255',
+            'day'         => 'required|string|max:20',
+            'time_start'  => 'required|string|max:5',
+            'time_end'    => 'required|string|max:5',
+            'description' => 'nullable|string',
+            'location'    => 'nullable|string|max:255',
+        ]);
+
+        $schedule->activities()->create($validated);
+
+        return redirect()->route('student.activities.index')
+            ->with('success', 'Kegiatan baru berhasil ditambahkan ke jadwal.');
+    }
+
+    public function editActivity(ScheduleExternalActivity $activity)
+    {
+        $schedule = $activity->schedule;
+        abort_if($schedule->user_id !== auth()->id(), 403);
+
+        return view('student.activities.edit', compact('schedule', 'activity'));
+    }
+
+    public function updateActivity(Request $request, ScheduleExternalActivity $activity)
+    {
+        $schedule = $activity->schedule;
+        abort_if($schedule->user_id !== auth()->id(), 403);
+
+        $validated = $request->validate([
+            'type'        => 'required|string|max:50',
+            'title'       => 'required|string|max:255',
+            'day'         => 'required|string|max:20',
+            'time_start'  => 'required|string|max:5',
+            'time_end'    => 'required|string|max:5',
+            'description' => 'nullable|string',
+            'location'    => 'nullable|string|max:255',
+        ]);
+
+        $activity->update($validated);
+
+        return redirect()->route('student.activities.index')
+            ->with('success', 'Kegiatan berhasil diperbarui.');
+    }
+
+    public function destroyActivity(ScheduleExternalActivity $activity)
+    {
+        $schedule = $activity->schedule;
+        abort_if($schedule->user_id !== auth()->id(), 403);
+
+        $activity->delete();
+
+        return redirect()->route('student.activities.index')
+            ->with('success', 'Kegiatan berhasil dihapus.');
     }
 }

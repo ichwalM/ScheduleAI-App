@@ -44,4 +44,9 @@ class Schedule extends Model
     {
         return $this->hasMany(ScheduleRecommendation::class)->orderBy('sort_order');
     }
+
+    public function activities()
+    {
+        return $this->hasMany(ScheduleExternalActivity::class)->orderByRaw("FIELD(day,'SENIN','SELASA','RABU','KAMIS','JUMAT','SABTU')")->orderBy('time_start');
+    }
 }

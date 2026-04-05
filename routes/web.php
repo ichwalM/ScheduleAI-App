@@ -50,6 +50,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('role:student')->prefix('student')->name('student.')->group(function () {
         Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
 
+        // Manajemen Mata Kuliah (semua jadwal)
+        Route::get('/mata-kuliah', [StudentController::class, 'indexCourses'])->name('courses.index');
+
         // Upload (blocked if schedule exists)
         Route::get('/upload', [StudentController::class, 'uploadForm'])->name('upload');
         Route::post('/upload', [StudentController::class, 'upload'])->name('upload.store');
@@ -66,7 +69,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/schedule/{schedule}/course/{course}/edit', [StudentController::class, 'editCourse'])->name('course.edit');
         Route::put('/schedule/{schedule}/course/{course}', [StudentController::class, 'updateCourse'])->name('course.update');
         Route::delete('/schedule/{schedule}/course/{course}', [StudentController::class, 'destroyCourse'])->name('course.destroy');
+
+        // Activity CRUD (Jobs/Freelance)
+        Route::get('/activities', [StudentController::class, 'indexActivities'])->name('activities.index');
+        Route::get('/activities/create', [StudentController::class, 'createActivity'])->name('activities.create');
+        Route::post('/activities', [StudentController::class, 'storeActivity'])->name('activities.store');
+        Route::get('/activities/{activity}/edit', [StudentController::class, 'editActivity'])->name('activities.edit');
+        Route::put('/activities/{activity}', [StudentController::class, 'updateActivity'])->name('activities.update');
+        Route::delete('/activities/{activity}', [StudentController::class, 'destroyActivity'])->name('activities.destroy');
     });
 });
 
 require __DIR__ . '/auth.php';
+
+/*
+|--------------------------------------------------------------------------
+| Public Profile Routes — MUST be last to avoid route conflicts
+|--------------------------------------------------------------------------
+*/
+use App\Http\Controllers\PublicProfileController;
+
+Route::get('/{username}', [PublicProfileController::class, 'show'])
+    ->name('public.profile')
+    ->where('username', '[a-zA-Z0-9_\-]+');
