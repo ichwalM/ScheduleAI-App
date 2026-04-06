@@ -19,25 +19,22 @@
 
 {{-- Agenda Table / List --}}
 <div style="margin: 32px 0;">
-    @foreach($items as $item)
-        <div style="border-left: 4px solid {{ $item->is_activity ? '#059669' : '#2563eb' }}; background: #f8fafc; padding: 16px; margin-bottom: 12px; border-radius: 0; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
-            <div style="font-size: 11px; font-weight: 900; color: {{ $item->is_activity ? '#059669' : '#2563eb' }}; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
-                {{ $item->time_start }} - {{ $item->time_end }}
-                &nbsp;|&nbsp; 
-                <span style="color: #64748b;">{{ $item->is_activity ? 'JOB/KEGIATAN' : 'KULIAH' }}</span>
-            </div>
-            <div style="font-size: 16px; font-weight: 800; color: #0f172a; text-transform: uppercase; line-height: 1.2; margin-bottom: 6px;">
-                {{ $item->is_activity ? $item->title : $item->name }}
-            </div>
-            
-            <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">
-                📍 Lokasi: {{ $item->is_activity ? ($item->location ?? '-') : ($item->room ?? '-') }}
-                @if(!$item->is_activity)
-                    &nbsp;|&nbsp; 🎓 SKS: {{ $item->credits }}
-                @endif
-            </div>
-        </div>
-    @endforeach
+@foreach($items as $item)
+<div style="border-left: 4px solid {{ $item->is_activity ? '#059669' : '#2563eb' }}; background: #f8fafc; padding: 16px; margin-bottom: 12px; border-radius: 0; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+<div style="font-size: 11px; font-weight: 900; color: {{ $item->is_activity ? '#059669' : '#2563eb' }}; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+{{ $item->time_start }} - {{ $item->time_end }} &nbsp;|&nbsp; <span style="color: #64748b;">{{ $item->is_activity ? 'JOB/KEGIATAN' : 'KULIAH' }}</span>
+</div>
+<div style="font-size: 16px; font-weight: 800; color: #0f172a; text-transform: uppercase; line-height: 1.2; margin-bottom: 6px;">
+{{ $item->is_activity ? $item->title : $item->name }}
+</div>
+<div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">
+📍 Lokasi: {{ $item->is_activity ? ($item->location ?? '-') : ($item->room ?? '-') }}
+@if(!$item->is_activity)
+&nbsp;|&nbsp; 🎓 SKS: {{ $item->credits }}
+@endif
+</div>
+</div>
+@endforeach
 </div>
 
 {{-- Info box --}}
