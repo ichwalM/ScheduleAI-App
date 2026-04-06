@@ -28,6 +28,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Google Calendar Routes
+    Route::get('/google/redirect', [\App\Http\Controllers\GoogleCalendarController::class, 'redirect'])->name('google.redirect');
+    Route::get('/google/callback', [\App\Http\Controllers\GoogleCalendarController::class, 'callback'])->name('google.callback');
+    Route::post('/schedule/{schedule}/sync-google', [\App\Http\Controllers\GoogleCalendarController::class, 'sync'])->name('google.sync');
+
+
     /* ── Admin ── */
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/profiles', [AdminController::class, 'profiles'])->name('profiles');

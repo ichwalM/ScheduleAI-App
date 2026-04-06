@@ -59,6 +59,28 @@
         </div>
     </div>
 
+    {{-- ═══ GOOGLE CALENDAR PROTOCOL ═══ --}}
+    <div class="flex items-center justify-between border-2 border-slate-900 bg-white p-6 mb-10 sharp-card">
+        <div class="flex items-center gap-4">
+            <svg class="w-8 h-8 {{ auth()->user()->google_token ? 'text-blue-600' : 'text-slate-400' }} shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <div>
+                <p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-1">Google Calendar Sync</p>
+                <p class="text-[11px] font-bold uppercase {{ auth()->user()->google_token ? 'text-blue-600' : 'text-slate-500' }}">
+                    {{ auth()->user()->google_token ? 'STATUS: TERHUBUNG' : 'STATUS: DISCONNECTED' }}
+                </p>
+            </div>
+        </div>
+        @if(!auth()->user()->google_token)
+            <a href="{{ route('google.redirect') }}" class="sharp-btn px-6 py-3 bg-blue-600 text-white font-black text-[10px] uppercase tracking-widest hover:bg-slate-900 transition-colors">
+                Connect Google Calendar
+            </a>
+        @else
+            <span class="text-[10px] font-black uppercase text-slate-900 bg-blue-100 px-3 py-1">Ready to Sync</span>
+        @endif
+    </div>
+
     {{-- ═══ GRID SUMMARY ═══ --}}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
         

@@ -93,12 +93,20 @@
         <div class="flex items-center gap-3 px-8 py-6 border-b-2 border-slate-900 bg-slate-50">
             <h2 class="text-xl font-black uppercase tracking-tight">Master Weekly Timeline</h2>
             <div class="ml-auto flex items-center gap-4">
+                @if(auth()->user()->google_token)
+                    <form action="{{ route('google.sync', $schedule) }}" method="POST" x-data @submit.prevent="if(confirm('Sinkronkan jadwal dan tugas terkait dengan file ini ke Google Calendar selama 1 semester kedepan?')) $el.submit()">
+                        @csrf
+                        <button type="submit" class="inline-flex items-center gap-2 text-[10px] font-black text-slate-900 bg-amber-400 hover:bg-slate-900 hover:text-white px-4 py-2 transition-colors uppercase tracking-widest shadow-[2px_2px_0px_#000]">
+                            Sync to Google
+                        </button>
+                    </form>
+                @endif
                 <a href="{{ route('student.course.create', $schedule) }}"
-                   class="inline-flex items-center gap-2 text-[10px] font-black text-white bg-blue-600 hover:bg-slate-900 px-4 py-2 transition-colors uppercase tracking-widest">
+                   class="inline-flex items-center gap-2 text-[10px] font-black text-white bg-blue-600 hover:bg-slate-900 px-4 py-2 transition-colors uppercase tracking-widest shadow-[2px_2px_0px_#000]">
                     (+) Add Course
                 </a>
                 <a href="{{ route('student.activities.create') }}"
-                   class="inline-flex items-center gap-2 text-[10px] font-black text-white bg-emerald-600 hover:bg-slate-900 px-4 py-2 transition-colors uppercase tracking-widest">
+                   class="inline-flex items-center gap-2 text-[10px] font-black text-white bg-emerald-600 hover:bg-slate-900 px-4 py-2 transition-colors uppercase tracking-widest shadow-[2px_2px_0px_#000]">
                     (+) Add Job
                 </a>
             </div>
