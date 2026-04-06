@@ -15,23 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // Admin account
         User::firstOrCreate(
-            ['email' => 'admin@scheduleai.com'],
+            ['email' => 'aidrophunter093@gmail.com'],
             [
                 'name'     => 'Admin',
-                'email'    => 'admin@scheduleai.com',
-                'password' => Hash::make('password'),
+                'email'    => 'aidrophunter093@gmail.com',
+                'password' => Hash::make('password123'),
                 'role'     => 'admin',
-            ]
-        );
-
-        // Demo student account
-        User::firstOrCreate(
-            ['email' => 'student@scheduleai.com'],
-            [
-                'name'     => 'Demo Student',
-                'email'    => 'student@scheduleai.com',
-                'password' => Hash::make('password'),
-                'role'     => 'student',
             ]
         );
     }
