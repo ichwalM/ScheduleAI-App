@@ -198,7 +198,7 @@
         {{-- ═══ REKOMENDASI (Current File) ═══ --}}
         <div class="sharp-card overflow-hidden">
             <div class="px-8 py-6 border-b-2 border-slate-900 bg-amber-50">
-                <h2 class="text-lg font-black uppercase tracking-tight text-amber-700">AI File Intelligence: {{ basename($schedule->file_path) }}</h2>
+                <h2 class="text-lg font-black uppercase tracking-tight text-amber-700">AI File Intelligence: {{ $schedule->original_filename ?? basename($schedule->file_path) }}</h2>
             </div>
             <div class="p-8">
                 @if($schedule->recommendations->isNotEmpty())
@@ -229,7 +229,7 @@
                     <div class="space-y-2">
                         @foreach(auth()->user()->schedules as $s)
                             <div class="flex items-center justify-between text-[11px] font-bold uppercase p-2 border border-slate-100">
-                                <span>{{ basename($s->file_path) }}</span>
+                                <span>{{ $s->original_filename ?? basename($s->file_path) }}</span>
                                 <span class="text-blue-600">{{ $s->courses->count() }} MK</span>
                             </div>
                         @endforeach
@@ -247,7 +247,7 @@
             </div>
             <div>
                 <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Active Buffer Focus</p>
-                <p class="text-sm font-black uppercase truncate">{{ basename($schedule->file_path) }}</p>
+                <p class="text-sm font-black uppercase truncate">{{ $schedule->original_filename ?? basename($schedule->file_path) }}</p>
             </div>
         </div>
         <div class="flex gap-4 w-full md:w-auto">

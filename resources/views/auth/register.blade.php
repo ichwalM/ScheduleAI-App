@@ -68,7 +68,7 @@
 <div class="min-h-[calc(100vh-73px)] grid lg:grid-cols-2">
 
     {{-- ── LEFT: FORM PANEL ── --}}
-    <div class="flex items-center justify-center px-6 py-16">
+    <div class="flex items-center justify-center px-6 py-16" x-data="{ showSopModal: false }">
         <div class="w-full max-w-md">
 
             <div class="mb-10">
@@ -157,10 +157,21 @@
                     @enderror
                 </div>
 
+                {{-- Terms and Conditions SOP --}}
+                <div class="flex items-start gap-3 border border-slate-200 p-4 bg-white">
+                    <input type="checkbox" name="terms" id="terms" class="mt-1 w-4 h-4 text-blue-600 border-2 border-slate-900 rounded-none focus:ring-blue-600 shrink-0" {{ old('terms') ? 'checked' : '' }} required>
+                    <label for="terms" class="text-[10px] font-bold text-slate-600 leading-relaxed uppercase tracking-wide">
+                        Saya menyetujui seluruh <button type="button" @click="showSopModal = true" class="text-blue-600 underline hover:text-blue-800 transition-colors cursor-pointer font-black">Standard Operating Procedure (SOP)</button> penggunaan ScheduleAI, termasuk analisis otomatis pada dokumen jadwal, serta manajemen notifikasi email harian.
+                    </label>
+                </div>
+                @error('terms')
+                    <p class="error-msg">{{ $message }}</p>
+                @enderror
+
                 {{-- Submit --}}
                 <div class="pt-2">
                     <button type="submit" class="sharp-btn">
-                        Daftar Sekarang →
+                        Daftar Penuh →
                     </button>
                 </div>
 
@@ -169,6 +180,68 @@
                     <a href="{{ route('login') }}" class="text-blue-600 hover:text-slate-900 transition-colors">Masuk di sini</a>
                 </p>
             </form>
+
+            {{-- SOP MODAL --}}
+            <div x-show="showSopModal" 
+                 style="display: none;" 
+                 class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 backdrop-blur-none"
+                 x-transition:enter-end="opacity-100 backdrop-blur-sm"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 backdrop-blur-sm"
+                 x-transition:leave-end="opacity-0 backdrop-blur-none">
+                 
+                <div class="bg-white border-4 border-slate-900 shadow-[8px_8px_0px_#000] max-w-2xl w-full max-h-[90vh] flex flex-col relative"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                     x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                     @click.away="showSopModal = false">
+                    
+                    {{-- Modal Header --}}
+                    <div class="flex items-center justify-between border-b-4 border-slate-900 p-6 bg-slate-50">
+                        <div>
+                            <p class="text-[10px] font-black uppercase text-blue-600 tracking-widest mb-1">Legal Framework</p>
+                            <h2 class="text-2xl font-black uppercase tracking-tighter text-slate-900">Standard Operating Procedure</h2>
+                        </div>
+                        <button @click="showSopModal = false" class="text-slate-400 hover:text-red-600 transition-colors">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+
+                    {{-- Modal Body --}}
+                    <div class="p-8 overflow-y-auto prose prose-slate prose-h3:text-blue-600 prose-h3:uppercase prose-h3:font-black prose-h3:tracking-tight max-w-none text-slate-700 text-sm">
+                        <h3>1. Pengenalan dan Persetujuan</h3>
+                        <p>Selamat datang di <strong>ScheduleAI</strong>, platform cerdas pengelolaan jadwal universitas. Dengan mendaftar, mengakses, atau menggunakan platform ini, Anda menyetujui seluruh ketentuan dalam sistem.</p>
+
+                        <h3>2. Manajemen Data Pribadi & Privasi</h3>
+                        <p>Sistem kami dibangun berdasarkan prinsip keamanan ketat:</p>
+                        <ul>
+                            <li><strong>Kerahasiaan Dokumen:</strong> File KRS/Jadwal hanya dikonsumsi sementara secara terisolasi.</li>
+                            <li><strong>Ekstraksi AI (Gemini):</strong> Data PDF hanya dibaca untuk mengumpulkan informasi nama kelas, jam, dosen, dan bobot SKS.</li>
+                        </ul>
+
+                        <h3>3. Manajemen Email Terjadwal</h3>
+                        <ul>
+                            <li><strong>Routine Blast:</strong> Kami berhak mengirim spam peringatan/jadwal pada pagi hari (06:00 WITA).</li>
+                            <li><strong>Opt-Out:</strong> Anda memiliki hak penuh untuk menonaktifkan spam ini dari menu Pengaturan Profil kapan saja.</li>
+                        </ul>
+
+                        <h3>4. Kewajiban Etis Pengendali</h3>
+                        <ul>
+                            <li>Dilarang menyebarkan file *reverse shell*, *payload*, maupun *malware* lewat form pengunggahan file!</li>
+                            <li>Amankan otentikasi login Anda sendiri dengan mutlak.</li>
+                        </ul>
+                    </div>
+
+                    {{-- Modal Footer --}}
+                    <div class="border-t-4 border-slate-900 p-6 flex justify-end bg-slate-50">
+                        <button type="button" @click="showSopModal = false" class="bg-blue-600 hover:bg-slate-900 border-2 border-slate-900 text-white font-black text-xs uppercase px-8 py-3 tracking-widest transition-colors shadow-[4px_4px_0px_#000]">
+                            Saya Mengerti
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::view('/terms', 'terms')->name('terms');
+
 Route::get('/', function () {
     if (auth()->check()) {
         return auth()->user()->role === 'admin'

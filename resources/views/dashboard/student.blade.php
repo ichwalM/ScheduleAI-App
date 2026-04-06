@@ -46,6 +46,58 @@
     </div>
     @endif
 
+    {{-- ═══ LIVE: TODAY'S AGENDA ═══ --}}
+    <div class="mb-10">
+        <div class="flex items-center justify-between border-b-4 border-slate-900 pb-4 mb-6">
+            <div>
+                <p class="text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] mb-1">Time Sync: {{ $currentTime }} WITA</p>
+                <h2 class="text-3xl font-black uppercase tracking-tighter">Live: <span class="text-slate-500">{{ $todayIndo }}</span></h2>
+            </div>
+            @if($ongoingItem)
+                <div class="animate-pulse bg-red-600 text-white text-[10px] font-black px-4 py-2 uppercase tracking-widest flex items-center gap-2">
+                    <span class="w-2 h-2 bg-white rounded-full"></span> Ongoing
+                </div>
+            @endif
+        </div>
+
+        @if($todayItems->isEmpty())
+            <div class="sharp-card p-10 flex flex-col items-center justify-center text-center opacity-50 grayscale">
+                <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <p class="text-xs font-black uppercase tracking-widest mb-1">Tidak Ada Jadwal Hari Ini</p>
+                <p class="text-[10px] font-bold text-slate-500 uppercase">Chill out. Take some rest.</p>
+            </div>
+        @else
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($todayItems as $item)
+                    @php
+                        $isOngoing = $ongoingItem && $ongoingItem->id === $item->id && get_class($ongoingItem) === get_class($item);
+                    @endphp
+                    <div class="sharp-card p-6 border-l-8 {{ $isOngoing ? 'border-amber-400 bg-amber-50 relative' : ($item->is_activity ? 'border-slate-800 bg-slate-900 text-white' : 'border-blue-600 bg-white') }} transition-all {{ $isOngoing ? 'shadow-[4px_4px_0px_#d97706]' : '' }}">
+                        @if($isOngoing)
+                            <div class="absolute -top-3 -right-3 bg-amber-500 text-white text-[9px] font-black px-3 py-1 uppercase tracking-widest shadow-[2px_2px_0px_#000] animate-pulse">🔥 LIVE NOW</div>
+                        @endif
+
+                        <div class="mb-4">
+                            <span class="text-[10px] font-black uppercase tracking-widest px-2 py-1 {{ $item->is_activity ? 'bg-white/10 text-white' : ($isOngoing ? 'bg-amber-200 text-amber-900' : 'bg-slate-100 text-slate-900') }}">
+                                {{ $item->time_start }} – {{ $item->time_end }}
+                            </span>
+                        </div>
+                        
+                        <p class="text-[9px] font-black {{ $item->is_activity ? 'text-slate-400' : ($isOngoing ? 'text-amber-600' : 'text-blue-600') }} uppercase tracking-[0.2em] mb-1">
+                            {{ $item->is_activity ? 'EXTERNAL JOB' : 'KULIAH' }}
+                        </p>
+                        
+                        <h4 class="text-sm font-black uppercase tracking-tight mb-4 leading-snug">{{ $item->is_activity ? $item->title : $item->name }}</h4>
+                        
+                        <div class="pt-4 border-t {{ $item->is_activity ? 'border-white/10' : ($isOngoing ? 'border-amber-200' : 'border-slate-100') }} flex items-center justify-between">
+                            <p class="text-[10px] font-bold {{ $item->is_activity ? 'text-white/50' : 'text-slate-500' }} uppercase tracking-widest truncate">{{ $item->is_activity ? ($item->location ?? 'REMOTE') : $item->room }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
     {{-- ═══ PROTOCOL UPDATE ═══ --}}
     <div class="flex items-start gap-4 border-2 border-slate-900 bg-slate-50 p-6 mb-10">
         <svg class="w-6 h-6 text-slate-900 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,5 +234,78 @@
         </div>
 
     </div>
+
+    {{-- ═══ MASTER TIMELINE ═══ --}}
+    @if(isset($grouped) && count($grouped) > 0)
+    <div class="mb-10">
+        <h2 class="text-3xl font-black uppercase tracking-tighter mb-8 border-b-4 border-slate-900 pb-4">Master Timeline</h2>
+        <div class="space-y-10">
+            @foreach($grouped as $day => $items)
+                @php $c = $dayColors[$day] ?? $dayColors['SENIN']; @endphp
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-lg font-black uppercase tracking-[0.2em] {{ $c['text'] }}">{{ $day }}</h3>
+                        <div class="flex-1 h-0.5 bg-slate-100"></div>
+                        <span class="text-[10px] font-black uppercase tracking-widest bg-slate-900 text-white px-3 py-1">{{ $items->count() }} Master Entries</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        @foreach($items as $item)
+                            @php
+                                $itemSchedule = $item->schedule;
+                                $isConflicting = $globalConflicts->contains(function($cf) use ($item) {
+                                    return ($cf['item1']->id === $item->id && get_class($cf['item1']) === get_class($item))
+                                        || ($cf['item2']->id === $item->id && get_class($cf['item2']) === get_class($item));
+                                });
+                            @endphp
+                            
+                            @if(!$item->is_activity)
+                                <div class="sharp-card p-5 border-l-8 {{ $isConflicting ? 'border-red-600' : 'border-slate-300' }} hover:bg-slate-50 transition-colors group relative">
+                                    @if($isConflicting)
+                                        <div class="absolute -top-3 -right-3 bg-red-600 text-white text-[8px] font-black px-2 py-1 shadow-[2px_2px_0px_#000] uppercase tracking-widest z-10">KONFLIK</div>
+                                    @endif
+                                    
+                                    <div class="mb-4">
+                                        <span class="text-[10px] font-black uppercase tracking-widest px-2 py-1 {{ $isConflicting ? 'bg-red-50 text-red-600' : 'bg-slate-100' }}">
+                                            {{ $item->time_start }} – {{ $item->time_end }}
+                                        </span>
+                                    </div>
+                                    <h4 class="text-sm font-black uppercase tracking-tight mb-2 leading-snug @if($isConflicting) text-red-600 @endif">{{ $item->name }}</h4>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest border border-slate-200 px-1.5 py-0.5">{{ $item->code }}</span>
+                                        @if($itemSchedule)
+                                            <span class="text-[9px] font-black text-blue-600 uppercase tracking-widest border border-blue-600 px-1.5 py-0.5">FILE: {{ substr($itemSchedule->original_filename ?? basename($itemSchedule->file_path), 0, 15) }}...</span>
+                                        @endif
+                                    </div>
+                                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest truncate max-w-[120px]">{{ $item->lecturer }}</p>
+                                        <p class="text-[10px] font-black text-slate-900 border-b-2 border-slate-900">{{ $item->room }}</p>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="sharp-card p-5 border-l-8 {{ $isConflicting ? 'border-red-600' : 'border-slate-900' }} bg-slate-900 text-white group relative">
+                                    @if($isConflicting)
+                                        <div class="absolute -top-3 -right-3 bg-red-600 text-white text-[8px] font-black px-2 py-1 shadow-[2px_2px_0px_#000] uppercase tracking-widest z-10">KONFLIK</div>
+                                    @endif
+                                    <div class="mb-4">
+                                        <span class="text-[10px] font-black uppercase tracking-widest px-2 py-1 bg-white/10 text-blue-400">
+                                            {{ $item->time_start }} – {{ $item->time_end }}
+                                        </span>
+                                    </div>
+                                    <p class="text-[9px] font-black text-blue-400 uppercase tracking-[0.2em] mb-1">EXTERNAL: {{ $item->type }}</p>
+                                    <h4 class="text-sm font-black uppercase tracking-tight mb-4 leading-snug @if($isConflicting) text-red-500 @endif">{{ $item->title }}</h4>
+                                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                                        <p class="text-[10px] font-bold text-white/50 uppercase tracking-widest truncate">{{ $item->location ?? 'REMOTE' }}</p>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
 
 </x-app-layout>

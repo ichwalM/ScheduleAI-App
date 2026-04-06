@@ -26,42 +26,56 @@
 <div class="flex min-h-screen">
 
     <!-- Sidebar -->
-    <aside class="flex flex-col bg-slate-900 z-20"
+    <aside class="flex flex-col bg-slate-900 z-20 sticky top-0 h-screen overflow-y-auto"
            :class="sidebarOpen ? 'w-64' : 'w-16'">
 
-        <!-- Logo -->
+        <!-- Logo / Profile -->
         <div class="flex items-center gap-3 px-5 py-6 border-b-2 border-slate-800">
-            <div class="shrink-0 w-9 h-9 bg-blue-600 flex items-center justify-center">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
+            @php
+                $user = auth()->user();
+                $avatar = $user?->profile?->avatar_path ? Storage::url($user->profile->avatar_path) : null;
+            @endphp
+            @if($avatar)
+                <img src="{{ $avatar }}" alt="Avatar" class="w-10 h-10 object-cover shrink-0 border-2 border-white/20">
+            @else
+                <div class="shrink-0 w-10 h-10 bg-blue-600 flex items-center justify-center font-black text-white shadow-[2px_2px_0px_#1e40af]">
+                    {{ strtoupper(substr($user->name ?? 'G', 0, 1)) }}
+                </div>
+            @endif
+            <div class="overflow-hidden flex flex-col justify-center" x-show="sidebarOpen" x-transition>
+                <span class="text-white font-black text-sm uppercase tracking-tighter truncate">{{ $user->name ?? 'GUEST' }}</span>
+                <span class="text-blue-400 font-bold text-[10px] uppercase tracking-widest truncate">{{ $user->role ?? 'VISITOR' }}</span>
             </div>
-            <span class="text-white font-black text-xl uppercase tracking-tighter" x-show="sidebarOpen" x-transition>ScheduleAI</span>
         </div>
 
         <!-- Navigation -->
         <nav class="flex-1 px-2 py-4 space-y-1">
-            @if(auth()->user()->role === 'admin')
-                <x-sidebar-link href="{{ route('admin.profiles') }}"  icon="user-group"  label="Profil Mahasiswa" :active="request()->routeIs('admin.profiles')"  :open="$sidebarOpen ?? true"/>
-                <x-sidebar-link href="{{ route('admin.dashboard') }}" icon="home"        label="Dashboard"        :active="request()->routeIs('admin.dashboard')" :open="$sidebarOpen ?? true"/>
-                <x-sidebar-link href="{{ route('admin.courses') }}"   icon="book-open"   label="Mata Kuliah"      :active="request()->routeIs('admin.courses*')"  :open="$sidebarOpen ?? true"/>
-                <x-sidebar-link href="{{ route('admin.schedules') }}" icon="calendar"    label="Jadwal"           :active="request()->routeIs('admin.schedules*')" :open="$sidebarOpen ?? true"/>
-                <x-sidebar-link href="{{ route('admin.students') }}"  icon="users"       label="Mahasiswa"        :active="request()->routeIs('admin.students')"  :open="$sidebarOpen ?? true"/>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <x-sidebar-link href="{{ route('admin.profiles') }}"  icon="user-group"  label="Profil Mahasiswa" :active="request()->routeIs('admin.profiles')"  :open="$sidebarOpen ?? true"/>
+                    <x-sidebar-link href="{{ route('admin.dashboard') }}" icon="home"        label="Dashboard"        :active="request()->routeIs('admin.dashboard')" :open="$sidebarOpen ?? true"/>
+                    <x-sidebar-link href="{{ route('admin.courses') }}"   icon="book-open"   label="Mata Kuliah"      :active="request()->routeIs('admin.courses*')"  :open="$sidebarOpen ?? true"/>
+                    <x-sidebar-link href="{{ route('admin.schedules') }}" icon="calendar"    label="Jadwal"           :active="request()->routeIs('admin.schedules*')" :open="$sidebarOpen ?? true"/>
+                    <x-sidebar-link href="{{ route('admin.students') }}"  icon="users"       label="Mahasiswa"        :active="request()->routeIs('admin.students')"  :open="$sidebarOpen ?? true"/>
+                @else
+                    <x-sidebar-link href="{{ route('student.dashboard') }}" icon="home"      label="Dashboard"          :active="request()->routeIs('student.dashboard')"   :open="$sidebarOpen ?? true"/>
+                    <x-sidebar-link href="{{ route('student.upload') }}"    icon="upload"    label="Unggah Jadwal"      :active="request()->routeIs('student.upload')"       :open="$sidebarOpen ?? true"/>
+                    <x-sidebar-link href="{{ route('student.courses.index') }}" icon="book-open" label="Mata Kuliah"    :active="request()->routeIs('student.courses.*')"    :open="$sidebarOpen ?? true"/>
+                    <x-sidebar-link href="{{ route('student.activities.index') }}" icon="briefcase" label="Manajemen Jadwal" :active="request()->routeIs('student.activities.*')" :open="$sidebarOpen ?? true"/>
+                @endif
+                
+                {{-- Spacer --}}
+                <div class="h-4"></div>
+                {{-- Global Settings --}}
+                <x-sidebar-link href="{{ route('profile.edit') }}" icon="cog" label="Pengaturan Profil" :active="request()->routeIs('profile.edit')" :open="$sidebarOpen ?? true"/>
             @else
-                <x-sidebar-link href="{{ route('student.dashboard') }}" icon="home"      label="Dashboard"          :active="request()->routeIs('student.dashboard')"   :open="$sidebarOpen ?? true"/>
-                <x-sidebar-link href="{{ route('student.upload') }}"    icon="upload"    label="Unggah Jadwal"      :active="request()->routeIs('student.upload')"       :open="$sidebarOpen ?? true"/>
-                <x-sidebar-link href="{{ route('student.courses.index') }}" icon="book-open" label="Mata Kuliah"    :active="request()->routeIs('student.courses.*')"    :open="$sidebarOpen ?? true"/>
-                <x-sidebar-link href="{{ route('student.activities.index') }}" icon="briefcase" label="Manajemen Jadwal" :active="request()->routeIs('student.activities.*')" :open="$sidebarOpen ?? true"/>
-            @endif
-            
-            {{-- Spacer --}}
-            <div class="h-4"></div>
-            {{-- Global Settings --}}
-            <x-sidebar-link href="{{ route('profile.edit') }}" icon="cog" label="Pengaturan Profil" :active="request()->routeIs('profile.edit')" :open="$sidebarOpen ?? true"/>
+                <x-sidebar-link href="{{ route('register') }}" icon="upload" label="Registrasi" :active="false" :open="$sidebarOpen ?? true"/>
+                <x-sidebar-link href="{{ route('login') }}" icon="users" label="Login" :active="false" :open="$sidebarOpen ?? true"/>
+            @endauth
         </nav>
 
         <!-- User info + logout -->
+        @auth
         <div class="border-t-2 border-slate-800 p-4">
             <div class="flex items-center gap-3">
                 <div class="shrink-0 w-10 h-10 bg-slate-700 flex items-center justify-center text-white font-bold text-sm">
@@ -82,6 +96,7 @@
                 </form>
             </div>
         </div>
+        @endauth
     </aside>
 
     <!-- Main content area -->

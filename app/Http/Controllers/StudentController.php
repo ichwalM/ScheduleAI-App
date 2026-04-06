@@ -31,7 +31,45 @@ class StudentController extends Controller
         $allItems         = auth()->user()->getAllItems();
         $globalConflicts  = auth()->user()->global_conflicts;
 
-        return view('dashboard.student', compact('schedules', 'latestSchedule', 'allItems', 'globalConflicts'));
+        $dayOrder  = ['SENIN','SELASA','RABU','KAMIS','JUMAT','SABTU','MINGGU'];
+        $dayColors = [
+            'SENIN'  => ['bg'=>'bg-blue-600',    'light'=>'bg-blue-50',    'text'=>'text-blue-900',    'badge'=>'bg-blue-900 text-white',    'border'=>'border-blue-900'],
+            'SELASA' => ['bg'=>'bg-violet-600',  'light'=>'bg-violet-50',  'text'=>'text-violet-900',  'badge'=>'bg-violet-900 text-white',  'border'=>'border-violet-900'],
+            'RABU'   => ['bg'=>'bg-sky-600',     'light'=>'bg-sky-50',     'text'=>'text-sky-900',     'badge'=>'bg-sky-900 text-white',     'border'=>'border-sky-900'],
+            'KAMIS'  => ['bg'=>'bg-emerald-600', 'light'=>'bg-emerald-50', 'text'=>'text-emerald-900', 'badge'=>'bg-emerald-900 text-white', 'border'=>'border-emerald-900'],
+            'JUMAT'  => ['bg'=>'bg-amber-600',   'light'=>'bg-amber-50',   'text'=>'text-amber-900',   'badge'=>'bg-amber-900 text-white',   'border'=>'border-amber-900'],
+            'SABTU'  => ['bg'=>'bg-rose-600',    'light'=>'bg-rose-50',    'text'=>'text-rose-900',    'badge'=>'bg-rose-900 text-white',    'border'=>'border-rose-900'],
+            'MINGGU' => ['bg'=>'bg-slate-600',   'light'=>'bg-slate-50',   'text'=>'text-slate-900',   'badge'=>'bg-slate-900 text-white',   'border'=>'border-slate-900'],
+        ];
+
+        $grouped = [];
+        foreach ($dayOrder as $d) {
+            $dayItems = $allItems->filter(fn($i) => strtoupper($i->day) === $d)->sortBy('time_start');
+            if ($dayItems->isNotEmpty()) $grouped[$d] = $dayItems;
+        }
+
+        // Live Today Logic
+        $now = \Carbon\Carbon::now('Asia/Makassar');
+        $mapDayToIndo = [
+            0 => 'MINGGU', 1 => 'SENIN', 2 => 'SELASA',
+            3 => 'RABU', 4 => 'KAMIS', 5 => 'JUMAT', 6 => 'SABTU'
+        ];
+        $todayIndo = $mapDayToIndo[$now->dayOfWeek];
+        $todayItems = $grouped[$todayIndo] ?? collect([]);
+        $ongoingItem = null;
+        $currentTime = $now->format('H:i');
+
+        foreach ($todayItems as $item) {
+            if ($currentTime >= $item->time_start && $currentTime <= $item->time_end) {
+                $ongoingItem = $item;
+                break;
+            }
+        }
+
+        return view('dashboard.student', compact(
+            'schedules', 'latestSchedule', 'allItems', 'globalConflicts', 'grouped', 'dayColors',
+            'todayIndo', 'todayItems', 'ongoingItem', 'currentTime'
+        ));
     }
 
     /* ─── Upload form ─── */

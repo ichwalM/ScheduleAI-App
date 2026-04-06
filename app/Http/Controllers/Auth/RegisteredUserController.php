@@ -34,6 +34,10 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'terms' => ['required', 'accepted'],
+        ], [
+            'terms.required' => 'Anda harus menyetujui SOP sebelum mendaftar.',
+            'terms.accepted' => 'Anda harus menyetujui SOP sebelum mendaftar.',
         ]);
 
         $user = User::create([
