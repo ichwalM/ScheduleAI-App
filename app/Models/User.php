@@ -62,6 +62,24 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::created(function (User $user) {
+            $user->profile()->create([]);
+        });
+    }
+
+    /**
+     * Get the user's profile.
+     */
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class, 'user_id');
+    }
+
+    /**
      * Send the password reset notification (Indonesian email).
      */
     public function sendPasswordResetNotification($token): void

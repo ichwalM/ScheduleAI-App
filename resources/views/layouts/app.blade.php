@@ -54,6 +54,11 @@
                 <x-sidebar-link href="{{ route('student.courses.index') }}" icon="book-open" label="Mata Kuliah"    :active="request()->routeIs('student.courses.*')"    :open="$sidebarOpen ?? true"/>
                 <x-sidebar-link href="{{ route('student.activities.index') }}" icon="briefcase" label="Manajemen Jadwal" :active="request()->routeIs('student.activities.*')" :open="$sidebarOpen ?? true"/>
             @endif
+            
+            {{-- Spacer --}}
+            <div class="h-4"></div>
+            {{-- Global Settings --}}
+            <x-sidebar-link href="{{ route('profile.edit') }}" icon="cog" label="Pengaturan Profil" :active="request()->routeIs('profile.edit')" :open="$sidebarOpen ?? true"/>
         </nav>
 
         <!-- User info + logout -->

@@ -26,13 +26,41 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        
+        // Update core user data
+        $user->fill([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
+
+        // Ensure profile exists
+        $profile = $user->profile ?? $user->profile()->create([]);
+
+        // Handle avatar upload
+        if ($request->hasFile('avatar')) {
+            // Delete old avatar if exists
+            if ($profile->avatar_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($profile->avatar_path)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($profile->avatar_path);
+            }
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $profile->avatar_path = $path;
+        }
+
+        // Update profile data
+        $profile->fill([
+            'phone_number' => $request->phone_number,
+            'bio' => $request->bio,
+            'daily_reminder_enabled' => $request->boolean('daily_reminder_enabled'),
+        ]);
+
+        $profile->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

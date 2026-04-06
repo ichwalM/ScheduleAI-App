@@ -58,6 +58,11 @@ class SendDailyReminders extends Command
         $sentCount = 0;
 
         foreach ($users as $user) {
+            // Check if user has disabled reminders
+            if ($user->profile && !$user->profile->daily_reminder_enabled) {
+                continue;
+            }
+
             $allItems = clone $user->allCourses;
             $allActivities = clone $user->allActivities;
             
