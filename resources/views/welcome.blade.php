@@ -47,7 +47,7 @@
             <div class="inline-block bg-blue-600 text-white px-4 py-1 text-xs font-bold uppercase tracking-widest mb-8">
                 Project Profile v1.0
             </div>
-            <h1 class="editorial-title font-black text-slate-900 mb-10" style="font-size: clamp(2.5rem, 6vw, 5rem); line-height: 0.9; letter-spacing: -0.04em;">
+            <h1 class="editorial-title font-black text-slate-900 mb-10 break-words" style="font-size: clamp(2rem, 5vw, 4.5rem); line-height: 0.9; letter-spacing: -0.04em;">
                 TRANSFORMING<br>
                 <span class="blue-accent">ACADEMIC</span><br>
                 SYSTEMS.
