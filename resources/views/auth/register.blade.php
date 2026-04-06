@@ -246,8 +246,11 @@
     </div>
 
     {{-- ── RIGHT: VISUAL PANEL ── --}}
-    <div class="hidden lg:flex flex-col justify-between bg-slate-900 p-16 border-l-2 border-slate-900">
-        <div>
+    <div class="hidden lg:flex flex-col justify-between bg-slate-900 p-16 border-l-2 border-slate-900 relative overflow-hidden">
+        {{-- Background Illustration --}}
+        <img src="{{ asset('images/illustration/Ilustration2.webp') }}" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen pointer-events-none" alt="AI Engine">
+        
+        <div class="relative z-10">
             <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-12">Keunggulan ScheduleAI</p>
             <h2 class="text-5xl font-black text-white uppercase tracking-tighter leading-none mb-16">
                 SMART<br>SCHEDULE<br><span class="text-blue-500">SYSTEM.</span>

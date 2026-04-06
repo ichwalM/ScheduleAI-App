@@ -67,7 +67,7 @@
         {{-- Right: Image --}}
         <div class="relative min-w-0">
             <div class="border-2 border-slate-900 p-2 bg-white shadow-[8px_8px_0px_#0f172a]">
-                <img src="{{ asset('images/doc_student.jpg') }}" alt="Student Documentation" class="w-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                <img src="{{ asset('images/illustration/Ilustration1.webp') }}" alt="Student Documentation" class="w-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
             </div>
             <div class="absolute -bottom-8 -left-8 w-40 h-40 border-2 border-slate-900 bg-blue-600 hidden lg:flex items-center justify-center p-6 text-white">
                 <p class="text-[10px] font-bold uppercase leading-tight">Dokumentasi Penggunaan Nyata di Kampus</p>
@@ -86,25 +86,21 @@
 
         <div class="grid md:grid-cols-3 gap-0 border-2 border-slate-900 bg-slate-900">
             <div class="bg-white border-r-2 border-slate-900 overflow-hidden">
-                <img src="{{ asset('images/doc_campus.jpg') }}" alt="Campus Hall" class="w-full h-64 object-cover border-b-2 border-slate-900">
+                <img src="{{ asset('images/illustration/Ilustration2.webp') }}" alt="Campus Hall" class="w-full h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
                 <div class="p-8">
                     <h3 class="text-xl font-bold uppercase mb-4">01. Lingkungan Akademik</h3>
                     <p class="text-sm text-slate-600 leading-relaxed">Implementasi sistem pada skala universitas, memastikan setiap mahasiswa memiliki profil jadwal yang terstruktur dan bebas konflik.</p>
                 </div>
             </div>
             <div class="bg-white border-r-2 border-slate-900 overflow-hidden">
-                <img src="{{ asset('images/doc_ai.jpg') }}" alt="AI Analysis" class="w-full h-64 object-cover border-b-2 border-slate-900">
+                <img src="{{ asset('images/illustration/Ilustration3.webp') }}" alt="AI Analysis" class="w-full h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
                 <div class="p-8">
                     <h3 class="text-xl font-bold uppercase mb-4">02. Analisis Presisi AI</h3>
                     <p class="text-sm text-slate-600 leading-relaxed">Ditenagai Google Gemini AI untuk ekstraksi data PDF yang akurat, mengubah dokumen mentah menjadi basis data yang dapat dikelola.</p>
                 </div>
             </div>
             <div class="bg-white overflow-hidden">
-                <div class="h-64 bg-blue-700 flex items-center justify-center p-12">
-                    <svg class="w-24 h-24 text-white opacity-20" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/>
-                    </svg>
-                </div>
+                <img src="{{ asset('images/documentations/schedules.png') }}" alt="Schedule Output" class="w-full h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
                 <div class="p-8">
                     <h3 class="text-xl font-bold uppercase mb-4">03. Rekomendasi Pintar</h3>
                     <p class="text-sm text-slate-600 leading-relaxed">Sistem memberikan saran optimasi berbasis Bahasa Indonesia, membantu mahasiswa memaksimalkan waktu perkuliahan mereka.</p>
