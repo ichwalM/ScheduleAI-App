@@ -30,7 +30,7 @@
 <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">
 📍 Lokasi: {{ $item->is_activity ? ($item->location ?? '-') : ($item->room ?? '-') }}
 @if(!$item->is_activity)
-&nbsp;|&nbsp; 🎓 SKS: {{ $item->credits }}
+&nbsp;|&nbsp; 📌 KELAS: {{ $item->class ?? '-' }} &nbsp;|&nbsp; 🎓 SKS: {{ $item->credits }}
 @endif
 </div>
 </div>

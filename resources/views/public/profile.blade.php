@@ -176,6 +176,7 @@
                                         </h3>
                                         <div class="flex flex-wrap gap-1.5 mb-3">
                                             <span class="text-[9px] font-bold text-slate-400 border border-slate-200 px-1.5 py-0.5 uppercase">{{ $item->code }}</span>
+                                            <span class="text-[9px] font-bold text-slate-600 border border-slate-300 px-1.5 py-0.5 uppercase bg-slate-50">KELAS: {{ $item->class ?? '-' }}</span>
                                             <span class="text-[9px] font-bold text-blue-600 border border-blue-200 px-1.5 py-0.5 uppercase">{{ $item->credits }} SKS</span>
                                         </div>
                                         <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">

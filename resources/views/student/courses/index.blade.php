@@ -153,6 +153,7 @@
                                             <th class="px-5 py-3 text-[9px] font-black uppercase tracking-widest text-slate-400">Waktu</th>
                                             <th class="px-5 py-3 text-[9px] font-black uppercase tracking-widest text-slate-400">Mata Kuliah</th>
                                             <th class="px-5 py-3 text-[9px] font-black uppercase tracking-widest text-slate-400">Kode</th>
+                                            <th class="px-5 py-3 text-[9px] font-black uppercase tracking-widest text-slate-400">Kelas</th>
                                             <th class="px-5 py-3 text-[9px] font-black uppercase tracking-widest text-slate-400">SKS</th>
                                             <th class="px-5 py-3 text-[9px] font-black uppercase tracking-widest text-slate-400">Dosen</th>
                                             <th class="px-5 py-3 text-[9px] font-black uppercase tracking-widest text-slate-400">Ruang</th>
@@ -189,7 +190,10 @@
                                                     <span class="text-[10px] font-bold text-slate-500 uppercase border border-slate-200 px-1.5 py-0.5">{{ $course->code ?? '—' }}</span>
                                                 </td>
                                                 <td class="px-5 py-4">
-                                                    <span class="text-[11px] font-black text-blue-600 uppercase">{{ $course->credits }}</span>
+                                                    <span class="text-[10px] font-black text-blue-600 uppercase">{{ $course->class ?? '—' }}</span>
+                                                </td>
+                                                <td class="px-5 py-4">
+                                                    <span class="text-[11px] font-black text-emerald-600 uppercase">{{ $course->credits }}</span>
                                                 </td>
                                                 <td class="px-5 py-4">
                                                     <span class="text-[10px] font-bold text-slate-500 uppercase truncate block max-w-[140px]">{{ $course->lecturer ?? '—' }}</span>

@@ -141,26 +141,40 @@
                                     @endif
                                     
                                     <div class="flex items-center justify-between mb-4">
-                                        <span class="text-[10px] font-black uppercase tracking-widest px-2 py-1 {{ $isConflicting ? 'bg-red-50 text-red-600' : 'bg-slate-100' }}">
-                                            {{ $item->time_start }} – {{ $item->time_end }}
-                                        </span>
+                                        <div class="flex flex-col">
+                                            <span class="text-[10px] font-black uppercase tracking-widest px-2 py-1 {{ $isConflicting ? 'bg-red-50 text-red-600' : 'bg-slate-100' }}">
+                                                {{ $item->time_start }} – {{ $item->time_end }}
+                                            </span>
+                                        </div>
                                         <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                             @if($itemSchedule && $itemSchedule->user_id === auth()->id())
-                                                <a href="{{ route('student.course.edit', [$itemSchedule, $item]) }}" class="text-slate-400 hover:text-blue-600 px-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></a>
+                                                <a href="{{ route('student.course.edit', [$itemSchedule, $item]) }}" class="text-slate-400 hover:text-blue-600 px-1" title="Edit Mata Kuliah">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                                </a>
                                             @endif
                                         </div>
                                     </div>
-                                    <h4 class="text-sm font-black uppercase tracking-tight mb-2 leading-snug @if($isConflicting) text-red-600 @endif">{{ $item->name }}</h4>
+                                    
+                                    <h4 class="text-sm font-black uppercase tracking-tight mb-3 leading-snug @if($isConflicting) text-red-600 @endif">{{ $item->name }}</h4>
+                                    
                                     <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest border border-slate-200 px-1.5 py-0.5">{{ $item->code }}</span>
+                                        <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest bg-slate-100 px-2 py-1">KODE: {{ $item->code }}</span>
+                                        <span class="text-[9px] font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-2 py-1">KELAS: {{ $item->class ?? '-' }}</span>
+                                        <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-1">{{ $item->credits }} SKS</span>
                                         @if(!$isCurrentFile && $itemSchedule)
-                                            <span class="text-[9px] font-black text-blue-600 uppercase tracking-widest border border-blue-600 px-1.5 py-0.5">FILE: {{ substr(basename($itemSchedule->file_path), 0, 10) }}...</span>
+                                            <span class="text-[9px] font-black text-rose-600 uppercase tracking-widest bg-rose-50 px-2 py-1">FILE: {{ substr(basename($itemSchedule->file_path), 0, 10) }}...</span>
                                         @endif
-                                        <span class="text-[9px] font-bold text-blue-600 uppercase tracking-widest border border-blue-600 px-1.5 py-0.5">{{ $item->credits }} SKS</span>
                                     </div>
-                                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                                        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest truncate max-w-[120px]">{{ $item->lecturer }}</p>
-                                        <p class="text-[10px] font-black text-slate-900 border-b-2 border-slate-900">{{ $item->room }}</p>
+
+                                    <div class="grid grid-cols-2 gap-y-3 gap-x-2 pt-4 border-t border-slate-100">
+                                        <div>
+                                            <span class="block text-[8px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Ruangan</span>
+                                            <span class="text-[10px] font-black text-slate-900 uppercase truncate block">{{ $item->room }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="block text-[8px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Dosen Pengampu</span>
+                                            <span class="text-[10px] font-bold text-slate-600 uppercase truncate block" title="{{ $item->lecturer }}">{{ $item->lecturer ?? 'TIDAK TERTERA' }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             @else

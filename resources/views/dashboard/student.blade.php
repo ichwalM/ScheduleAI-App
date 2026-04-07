@@ -89,8 +89,24 @@
                         
                         <h4 class="text-sm font-black uppercase tracking-tight mb-4 leading-snug">{{ $item->is_activity ? $item->title : $item->name }}</h4>
                         
-                        <div class="pt-4 border-t {{ $item->is_activity ? 'border-white/10' : ($isOngoing ? 'border-amber-200' : 'border-slate-100') }} flex items-center justify-between">
-                            <p class="text-[10px] font-bold {{ $item->is_activity ? 'text-white/50' : 'text-slate-500' }} uppercase tracking-widest truncate">{{ $item->is_activity ? ($item->location ?? 'REMOTE') : $item->room }}</p>
+                        @if(!$item->is_activity)
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 {{ $isOngoing ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-500' }}">KODE: {{ $item->code }}</span>
+                                <span class="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 {{ $isOngoing ? 'bg-amber-200 text-amber-800' : 'bg-blue-50 text-blue-600' }}">KELAS: {{ $item->class ?? '-' }}</span>
+                            </div>
+                        @endif
+                        
+                        <div class="grid grid-cols-2 gap-y-3 gap-x-2 pt-4 border-t {{ $item->is_activity ? 'border-white/10' : ($isOngoing ? 'border-amber-200' : 'border-slate-100') }}">
+                            <div>
+                                <span class="block text-[8px] font-black uppercase tracking-widest mb-0.5 {{ $item->is_activity ? 'text-slate-500' : ($isOngoing ? 'text-amber-500' : 'text-slate-400') }}">Lokasi / Ruangan</span>
+                                <span class="text-[10px] font-black uppercase truncate block {{ $item->is_activity ? 'text-slate-300' : 'text-slate-900' }}">{{ $item->is_activity ? ($item->location ?? 'REMOTE') : $item->room }}</span>
+                            </div>
+                            @if(!$item->is_activity)
+                            <div>
+                                <span class="block text-[8px] font-black uppercase tracking-widest mb-0.5 {{ $isOngoing ? 'text-amber-500' : 'text-slate-400' }}">Dosen / SKS</span>
+                                <span class="text-[10px] font-bold uppercase truncate block {{ $isOngoing ? 'text-amber-800' : 'text-slate-600' }}" title="{{ $item->lecturer }}">{{ $item->lecturer ?? 'TIDAK TERTERA' }} ({{ $item->credits }} SKS)</span>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach
