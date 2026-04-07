@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') - ScheduleAI Terminal</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo/logo-ico.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body { background-color: #f8fafc; font-family: 'Inter', sans-serif; }

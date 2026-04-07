@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ScheduleAI — Documentation & Project Profile</title>
     <meta name="description" content="Dokumentasi dan profil proyek ScheduleAI — Transformasi jadwal kuliah dengan kecerdasan buatan.">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo/logo-ico.ico') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -24,12 +25,8 @@
 <nav class="border-b-2 border-slate-900 bg-white sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
         <div class="flex items-center gap-4">
-            <div class="w-10 h-10 bg-slate-900 flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-            </div>
-            <span class="font-black text-2xl tracking-tighter uppercase">ScheduleAI</span>
+            <img src="{{ asset('images/logo/logo.svg') }}" alt="ScheduleAI Logo" class="w-10 h-10 object-contain">
+            <span class="font-black text-2xl tracking-tighter uppercase">Schedule <span class="blue-accent">AI</span></span>
         </div>
         <div class="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest">
             <a href="#documentation" class="hover:blue-accent transition-colors">Documentation</a>
@@ -69,8 +66,8 @@
             <div class="border-2 border-slate-900 p-2 bg-white shadow-[8px_8px_0px_#0f172a]">
                 <img src="{{ asset('images/illustration/Ilustration1.webp') }}" alt="Student Documentation" class="w-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
             </div>
-            <div class="absolute -bottom-8 -left-8 w-40 h-40 border-2 border-slate-900 bg-blue-600 hidden lg:flex items-center justify-center p-6 text-white">
-                <p class="text-[10px] font-bold uppercase leading-tight">Dokumentasi Penggunaan Nyata di Kampus</p>
+            <div class="absolute -bottom-4 -left-4 w-40 h-40 border-2 border-slate-900 bg-blue-600 hidden lg:flex items-center justify-center p-6 text-white">
+                <span class="text-5xl font-black">99%</span>
             </div>
         </div>
     </div>
@@ -158,7 +155,7 @@
 <footer class="bg-slate-900 text-white py-20 px-6">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
         <div>
-            <h2 class="text-4xl font-black uppercase tracking-tighter mb-8">ScheduleAI</h2>
+            <h2 class="text-4xl font-black uppercase tracking-tighter mb-8">Schedule<span class="blue-accent">AI</span></h2>
             <div class="flex gap-4">
                 <a href="#" class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">FB</a>
                 <a href="#" class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">IG</a>
@@ -184,10 +181,14 @@
             </div>
         </div>
     </div>
-    <div class="max-w-7xl mx-auto mt-20 pt-10 border-t border-white/10 flex justify-between items-center text-[10px] uppercase font-bold tracking-widest text-slate-500">
-        <p>© 2026 ScheduleAI documentation team.</p>
-        <p>Built with precision.</p>
-    </div>
+    <div class="max-w-7xl mx-auto mt-20 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase font-bold tracking-widest text-slate-500">
+        <p>© 2026 ScheduleAI. Developed by <a href="https://app.walldev.my.id/" target="_blank" class="text-white hover:text-blue-500 hover:underline transition-all">Ichwal</a>.</p>
+        <div class="flex gap-6">
+            <a href="https://github.com/ichwalM" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+            <a href="https://www.linkedin.com/in/ichwal/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+            <a href="https://app.walldev.my.id/" target="_blank" class="hover:text-white transition-colors">Portfolio</a>
+        </div>
+    </div>  
 </footer>
 
 </body>

@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Daftar Akun — ScheduleAI</title>
-    <meta name="description" content="Buat akun ScheduleAI Anda dan mulai kelola jadwal akademik secara cerdas.">
+    <title>ScheduleAI — Register Terminal</title>
+    <meta name="description" content="Daftar ke ScheduleAI dan kelola jadwal akademik Anda.">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo/logo-ico.ico') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -51,11 +52,7 @@
 <nav class="border-b-2 border-slate-900 bg-white">
     <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
         <a href="{{ url('/') }}" class="flex items-center gap-3">
-            <div class="w-9 h-9 bg-slate-900 flex items-center justify-center">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-            </div>
+            <img src="{{ asset('images/logo/logo.svg') }}" alt="ScheduleAI Logo" class="w-9 h-9 object-contain">
             <span class="font-black text-xl tracking-tighter uppercase">ScheduleAI</span>
         </a>
         <a href="{{ route('login') }}" class="text-[11px] font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">
@@ -292,8 +289,15 @@
                 </div>
             </div>
         </div>
-        <div class="border-t border-white/10 pt-10">
-            <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">© 2026 ScheduleAI — Built with precision.</p>
+        <div class="border-t border-white/10 pt-10 flex flex-col gap-3">
+            <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                © 2026 ScheduleAI — Built by <a href="https://app.walldev.my.id/" target="_blank" class="text-white hover:text-blue-400 hover:underline transition-all">Ichwal</a>.
+            </p>
+            <div class="flex gap-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                <a href="https://github.com/ichwalM" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                <a href="https://www.linkedin.com/in/ichwal/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="https://app.walldev.my.id/" target="_blank" class="hover:text-white transition-colors">Portfolio</a>
+            </div>
         </div>
     </div>
 </div>
