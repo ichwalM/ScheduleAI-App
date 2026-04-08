@@ -11,4 +11,4 @@ use Illuminate\Support\Facades\Schedule;
 
 // Send email reminders every morning at 06:00 WITA (Asia/Makassar)
 Schedule::command('app:send-daily-reminders')
-    ->dailyAt('09:25');
+    ->dailyAt('09:34');
