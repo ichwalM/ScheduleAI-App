@@ -16,7 +16,7 @@
     {{-- ═══ HERO DOCUMENTATION ═══ --}}
     <div class="relative w-full h-40 bg-slate-900 overflow-hidden mb-8 border-b-4 border-blue-600">
         <div class="absolute inset-0 opacity-30 bg-doc-student"></div>
-        <div class="relative z-10 h-full flex flex-col justify-center px-10 border-l-8 border-white">
+        <div class="relative z-10 h-full flex flex-col justify-center px-6 md:px-10 border-l-8 border-white">
             <p class="text-blue-300 text-[10px] font-bold uppercase tracking-widest mb-1">Authenticated Student Terminal</p>
             <h1 class="text-4xl font-black text-white uppercase tracking-tighter leading-none">
                 {{ auth()->user()->name }}
@@ -33,7 +33,7 @@
 
     {{-- ═══ GLOBAL CONFLICT ALERT ═══ --}}
     @if($conflictCount > 0)
-    <div class="flex items-center gap-4 border-4 border-red-600 bg-red-50 p-6 mb-10 animate-pulse">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-4 border-red-600 bg-red-50 p-6 mb-10 animate-pulse">
         <div class="w-12 h-12 bg-red-600 flex items-center justify-center shrink-0">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
@@ -128,7 +128,7 @@
     </div>
 
     {{-- ═══ GOOGLE CALENDAR PROTOCOL ═══ --}}
-    <div class="flex items-center justify-between border-2 border-slate-900 bg-white p-6 mb-10 sharp-card">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-2 border-slate-900 bg-white p-6 mb-10 sharp-card gap-4">
         <div class="flex items-center gap-4">
             <svg class="w-8 h-8 {{ auth()->user()->google_token ? 'text-blue-600' : 'text-slate-400' }} shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>

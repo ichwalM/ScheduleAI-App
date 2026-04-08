@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ sidebarOpen: true, darkMode: false }" :class="{ 'dark': darkMode }">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ sidebarOpen: window.innerWidth >= 768, darkMode: false }" :class="{ 'dark': darkMode }">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,18 +17,25 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .sidebar-nav a.active { @apply bg-blue-700 text-white; }
-        aside { transition: width 0.3s ease; border-right: 2px solid #000; }
+        aside { transition: width 0.3s ease, transform 0.3s ease; border-right: 2px solid #000; }
         * { border-radius: 0 !important; }
         .sharp-border { border: 2px solid #000; }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 antialiased">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 antialiased" @resize.window="sidebarOpen = window.innerWidth >= 768">
 
 <div class="flex min-h-screen">
 
+    <!-- Mobile Sidebar Backdrop -->
+    <div x-show="sidebarOpen"
+         @click="sidebarOpen = false"
+         x-transition.opacity
+         class="fixed inset-0 bg-slate-900/50 z-20 md:hidden backdrop-blur-sm">
+    </div>
+
     <!-- Sidebar -->
-    <aside class="flex flex-col bg-slate-900 z-20 sticky top-0 h-screen overflow-y-auto"
-           :class="sidebarOpen ? 'w-64' : 'w-16'">
+    <aside class="flex flex-col bg-slate-900 z-30 fixed md:sticky top-0 h-screen overflow-y-auto transform md:transform-none"
+           :class="sidebarOpen ? 'translate-x-0 w-64' : '-translate-x-full md:translate-x-0 w-64 md:w-16'">
 
         <!-- Logo / Profile -->
         <div class="flex items-center gap-3 px-5 py-6 border-b-2 border-slate-800">

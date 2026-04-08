@@ -43,8 +43,8 @@
         {{-- ═══ HERO INFO ═══ --}}
         <div class="relative w-full h-48 bg-slate-900 overflow-hidden mb-10 border-b-4 border-blue-600 shadow-[8px_8px_0px_#000]">
             <div class="absolute inset-0 opacity-20 bg-doc-campus"></div>
-            <div class="relative z-10 h-full flex flex-row items-center px-10 gap-10">
-                <div class="w-24 h-24 bg-white border-4 border-slate-900 flex items-center justify-center text-4xl font-black shrink-0 shadow-[4px_4px_0px_#1e40af]">
+            <div class="relative z-10 h-full flex flex-row items-center px-6 md:px-10 gap-6 md:gap-10">
+                <div class="w-16 h-16 md:w-24 md:h-24 bg-white border-4 border-slate-900 flex items-center justify-center text-3xl md:text-4xl font-black shrink-0 shadow-[4px_4px_0px_#1e40af]">
                     {{ strtoupper(substr($schedule->student_name ?? auth()->user()->name, 0, 1)) }}
                 </div>
                 <div class="flex-1">
@@ -90,9 +90,9 @@
 
     {{-- ═══ JADWAL MINGGUAN (MASTER TIMELINE) ═══ --}}
     <div class="sharp-card mb-10 overflow-hidden">
-        <div class="flex items-center gap-3 px-8 py-6 border-b-2 border-slate-900 bg-slate-50">
-            <h2 class="text-xl font-black uppercase tracking-tight">Master Weekly Timeline</h2>
-            <div class="ml-auto flex items-center gap-4">
+        <div class="flex flex-col xl:flex-row items-start xl:items-center gap-4 px-6 lg:px-8 py-6 border-b-2 border-slate-900 bg-slate-50">
+            <h2 class="text-lg md:text-xl font-black uppercase tracking-tight">Master Weekly Timeline</h2>
+            <div class="xl:ml-auto flex flex-wrap items-center gap-2 sm:gap-4">
                 @if(auth()->user()->google_token)
                     <form action="{{ route('google.sync', $schedule) }}" method="POST" x-data @submit.prevent="if(confirm('Sinkronkan jadwal dan tugas terkait dengan file ini ke Google Calendar selama 1 semester kedepan?')) $el.submit()">
                         @csrf

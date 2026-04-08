@@ -28,10 +28,10 @@
             <img src="{{ asset('images/logo/logo.svg') }}" alt="ScheduleAI Logo" class="w-10 h-10 object-contain">
             <span class="font-black text-2xl tracking-tighter uppercase">Schedule <span class="blue-accent">AI</span></span>
         </div>
-        <div class="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest">
-            <a href="#documentation" class="hover:blue-accent transition-colors">Documentation</a>
-            <a href="#features" class="hover:blue-accent transition-colors">Features</a>
-            <a href="{{ route('login') }}" class="px-6 py-2 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-all">Sign In</a>
+        <div class="flex items-center gap-4 text-sm font-bold uppercase tracking-widest">
+            <a href="#documentation" class="hidden md:block hover:blue-accent transition-colors">Documentation</a>
+            <a href="#features" class="hidden md:block hover:blue-accent transition-colors">Features</a>
+            <a href="{{ route('login') }}" class="px-4 py-2 md:px-6 md:py-2 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-all text-xs md:text-sm">Sign In</a>
         </div>
     </div>
 </nav>
@@ -52,11 +52,11 @@
             <p class="text-base text-slate-600 max-w-md mb-12 leading-relaxed">
                 ScheduleAI bukan sekadar alat manajemen waktu. Ini adalah sistem dokumentasi cerdas yang menggabungkan Google Gemini AI dengan struktur data relasional untuk efisiensi universitas.
             </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="{{ route('register') }}" class="px-10 py-5 bg-slate-900 text-white font-bold uppercase tracking-widest text-xs hover:bg-blue-700 transition-all">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="{{ route('register') }}" class="px-8 py-4 sm:px-10 sm:py-5 bg-slate-900 text-white font-bold uppercase tracking-widest text-xs hover:bg-blue-700 transition-all text-center">
                     Start Your Profile
                 </a>
-                <a href="{{ route('login') }}" class="px-10 py-5 border-2 border-slate-900 text-slate-900 font-bold uppercase tracking-widest text-xs hover:bg-slate-900 hover:text-white transition-all">
+                <a href="{{ route('login') }}" class="px-8 py-4 sm:px-10 sm:py-5 border-2 border-slate-900 text-slate-900 font-bold uppercase tracking-widest text-xs hover:bg-slate-900 hover:text-white transition-all text-center">
                     Sign In
                 </a>
             </div>
@@ -81,23 +81,23 @@
             <div class="w-24 h-2 bg-blue-600"></div>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-0 border-2 border-slate-900 bg-slate-900">
-            <div class="bg-white border-r-2 border-slate-900 overflow-hidden">
-                <img src="{{ asset('images/illustration/Ilustration2.webp') }}" alt="Campus Hall" class="w-full h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
-                <div class="p-8">
-                    <h3 class="text-xl font-bold uppercase mb-4">01. Lingkungan Akademik</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Implementasi sistem pada skala universitas, memastikan setiap mahasiswa memiliki profil jadwal yang terstruktur dan bebas konflik.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-2 border-slate-900 bg-slate-900">
+            <div class="bg-white border-b-2 md:border-b-0 md:border-r-2 border-slate-900 overflow-hidden">
+                <img src="{{ asset('images/illustration/Ilustration2.webp') }}" alt="Campus Hall" class="w-full h-48 md:h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
+                <div class="p-6 md:p-8">
+                    <h3 class="text-lg md:text-xl font-bold uppercase mb-4">01. Lingkungan Akademik</h3>
+                    <p class="text-xs md:text-sm text-slate-600 leading-relaxed">Implementasi sistem pada skala universitas, memastikan setiap mahasiswa memiliki profil jadwal yang terstruktur dan bebas konflik.</p>
                 </div>
             </div>
-            <div class="bg-white border-r-2 border-slate-900 overflow-hidden">
-                <img src="{{ asset('images/illustration/Ilustration3.webp') }}" alt="AI Analysis" class="w-full h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
-                <div class="p-8">
-                    <h3 class="text-xl font-bold uppercase mb-4">02. Analisis Presisi AI</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Ditenagai Google Gemini AI untuk ekstraksi data PDF yang akurat, mengubah dokumen mentah menjadi basis data yang dapat dikelola.</p>
+            <div class="bg-white border-b-2 md:border-b-0 md:border-r-2 border-slate-900 overflow-hidden">
+                <img src="{{ asset('images/illustration/Ilustration3.webp') }}" alt="AI Analysis" class="w-full h-48 md:h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
+                <div class="p-6 md:p-8">
+                    <h3 class="text-lg md:text-xl font-bold uppercase mb-4">02. Analisis Presisi AI</h3>
+                    <p class="text-xs md:text-sm text-slate-600 leading-relaxed">Ditenagai Google Gemini AI untuk ekstraksi data PDF yang akurat, mengubah dokumen mentah menjadi basis data yang dapat dikelola.</p>
                 </div>
             </div>
             <div class="bg-white overflow-hidden">
-                <img src="{{ asset('images/documentations/schedules.png') }}" alt="Schedule Output" class="w-full h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
+                <img src="{{ asset('images/documentations/schedules.png') }}" alt="Schedule Output" class="w-full h-48 md:h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
                 <div class="p-8">
                     <h3 class="text-xl font-bold uppercase mb-4">03. Rekomendasi Pintar</h3>
                     <p class="text-sm text-slate-600 leading-relaxed">Sistem memberikan saran optimasi berbasis Bahasa Indonesia, membantu mahasiswa memaksimalkan waktu perkuliahan mereka.</p>
@@ -110,26 +110,25 @@
 {{-- ═══════════════════════════════ FEATURES ═══════════════════════════════ --}}
 <section id="features" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-                <h2 class="text-6xl font-black uppercase tracking-tighter leading-none mb-12">
-                    STRICT DATA<br>
-                    <span class="blue-accent">NORMALIZATION.</span>
-                </h2>
-                <div class="space-y-12">
-                    <div class="flex gap-6">
-                        <span class="text-4xl font-black text-slate-200">01</span>
-                        <div>
-                            <h4 class="text-lg font-bold uppercase mb-2">Relational Table Storage</h4>
-                            <p class="text-slate-500">Bukan sekadar JSON. Data Anda dipetakan ke tabel normal (Courses, Conflicts, Recommendations) untuk fleksibilitas edit maksimal.</p>
-                        </div>
+                <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4">System Features</h2>
+                <div class="w-24 h-2 bg-blue-600 mb-8"></div>
+                <p class="text-slate-600 font-medium max-w-sm">Dirancang dengan arsitektur ketat untuk mengeliminasi bentrok jadwal dan menyediakan data yang tervalidasi seketika.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
+                <div class="flex gap-6">
+                    <span class="text-4xl font-black text-slate-200">01</span>
+                    <div>
+                        <h4 class="text-lg font-bold uppercase mb-2">Relational Table Storage</h4>
+                        <p class="text-slate-500">Bukan sekadar JSON. Data Anda dipetakan ke tabel normal (Courses, Conflicts, Recommendations) untuk fleksibilitas edit maksimal.</p>
                     </div>
-                    <div class="flex gap-6">
-                        <span class="text-4xl font-black text-slate-200">02</span>
-                        <div>
-                            <h4 class="text-lg font-bold uppercase mb-2">Profile Centralization</h4>
-                            <p class="text-slate-500">Panel Admin yang tegas untuk memantau aktivitas mahasiswa, status analisis, dan manajemen data terpusat.</p>
-                        </div>
+                </div>
+                <div class="flex gap-6">
+                    <span class="text-4xl font-black text-slate-200">02</span>
+                    <div>
+                        <h4 class="text-lg font-bold uppercase mb-2">Profile Centralization</h4>
+                        <p class="text-slate-500">Panel Admin yang tegas untuk memantau aktivitas mahasiswa, status analisis, dan manajemen data terpusat.</p>
                     </div>
                 </div>
             </div>

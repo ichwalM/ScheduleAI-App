@@ -47,7 +47,7 @@
                     {{ strtoupper(substr($user->name, 0, 1)) }}
                 </div>
                 <div>
-                    <h1 class="text-5xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-none break-words">
                         {{ $user->name }}
                     </h1>
                     @php $latestAnalyzed = $schedules->first(); @endphp
@@ -61,17 +61,17 @@
         </div>
 
         {{-- Master Stats --}}
-        <div class="flex gap-0 border-2 border-white/20">
-            <div class="px-8 py-5 border-r border-white/20">
-                <p class="text-2xl font-black text-white">{{ $schedules->count() }}</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-0 border-2 border-white/20 w-full md:w-auto">
+            <div class="px-6 py-5 border-r border-b sm:border-b-0 border-white/20">
+                <p class="text-xl md:text-2xl font-black text-white">{{ $schedules->count() }}</p>
                 <p class="text-[9px] font-bold text-white/40 uppercase tracking-widest">Jadwal Aktif</p>
             </div>
-            <div class="px-8 py-5 border-r border-white/20">
-                <p class="text-2xl font-black text-white">{{ $allItems->count() }}</p>
+            <div class="px-6 py-5 border-b sm:border-b-0 sm:border-r border-white/20">
+                <p class="text-xl md:text-2xl font-black text-white">{{ $allItems->count() }}</p>
                 <p class="text-[9px] font-bold text-white/40 uppercase tracking-widest">Total Entri</p>
             </div>
-            <div class="px-8 py-5">
-                <p class="text-2xl font-black {{ $globalConflicts->count() > 0 ? 'text-red-400' : 'text-emerald-400' }}">
+            <div class="px-6 py-5 col-span-2 sm:col-span-1">
+                <p class="text-xl md:text-2xl font-black {{ $globalConflicts->count() > 0 ? 'text-red-400' : 'text-emerald-400' }}">
                     {{ $globalConflicts->count() }}
                 </p>
                 <p class="text-[9px] font-bold text-white/40 uppercase tracking-widest">Konflik</p>
@@ -84,7 +84,7 @@
 
     {{-- ═══ GLOBAL CONFLICT ALERT ═══ --}}
     @if($globalConflicts->count() > 0)
-    <div class="flex items-center gap-4 border-4 border-red-600 bg-red-50 p-6 mb-10">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-4 border-red-600 bg-red-50 p-6 mb-10">
         <div class="w-12 h-12 bg-red-600 flex items-center justify-center shrink-0">
             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
