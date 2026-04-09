@@ -9,6 +9,5 @@ Artisan::command('inspire', function () {
 
 use Illuminate\Support\Facades\Schedule;
 
-// Send email reminders every morning at 06:00 WITA (Asia/Makassar)
 Schedule::command('app:send-daily-reminders')
-    ->dailyAt('09:38');
+    ->dailyAt('11:05');

@@ -17,6 +17,7 @@
         .blue-accent { color: #1e40af; }
         .bg-blue-accent { background-color: #1e40af; }
         .hover-sharp:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0px #1e40af; transition: all 0.2s ease; }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body class="bg-white text-slate-900 antialiased bg-grid">
@@ -67,7 +68,7 @@
                 <img src="{{ asset('images/illustration/Ilustration1.webp') }}" alt="Student Documentation" class="w-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
             </div>
             <div class="absolute -bottom-4 -left-4 w-40 h-40 border-2 border-slate-900 bg-blue-600 hidden lg:flex items-center justify-center p-6 text-white">
-                <span class="text-5xl font-black">99%</span>
+                <span class="text-5xl font-black" x-data="{ count: 0 }" x-init="let int = setInterval(() => { if(count < 99) count++; else clearInterval(int); }, 20)" x-text="count + '%'">0%</span>
             </div>
         </div>
     </div>
@@ -77,7 +78,7 @@
 <section id="documentation" class="py-24 border-b-2 border-slate-900 bg-slate-50">
     <div class="max-w-7xl mx-auto px-6">
         <div class="mb-20">
-            <h2 class="text-5xl font-black uppercase tracking-tighter mb-4">Project Documentation</h2>
+            <h2 class="text-4xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 break-words">Project Documentation</h2>
             <div class="w-24 h-2 bg-blue-600"></div>
         </div>
 

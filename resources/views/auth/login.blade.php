@@ -68,8 +68,6 @@
     {{-- ── LEFT: VISUAL PANEL ── --}}
     <div class="hidden lg:flex flex-col justify-between bg-slate-900 p-16 border-r-2 border-slate-900 relative overflow-hidden">
         {{-- Background Illustration --}}
-        <img src="{{ asset('images/illustration/Ilustration3.webp') }}" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen pointer-events-none" alt="AI Logic">
-        
         <div class="relative z-10">
             <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-12">Student Intelligence Terminal</p>
             <h2 class="text-6xl font-black text-white uppercase tracking-tighter leading-none mb-16">
