@@ -132,18 +132,18 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-slate-100 p-8 border-2 border-slate-900 border-b-8 flex flex-col justify-end">
-                    <span class="text-5xl font-black blue-accent mb-4">100%</span>
-                    <p class="text-xs font-bold uppercase">Automated Parsing</p>
+            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                <div class="bg-slate-100 p-4 md:p-8 border-2 border-slate-900 border-b-8 flex flex-col justify-end">
+                    <span class="text-3xl md:text-5xl font-black blue-accent mb-2 md:mb-4">100%</span>
+                    <p class="text-[10px] md:text-xs font-bold uppercase">Automated Parsing</p>
                 </div>
-                <div class="bg-blue-800 p-8 border-2 border-slate-900 border-b-8 flex flex-col justify-end text-white">
-                    <span class="text-5xl font-black mb-4">< 30s</span>
-                    <p class="text-xs font-bold uppercase">Processing Speed</p>
+                <div class="bg-blue-800 p-4 md:p-8 border-2 border-slate-900 border-b-8 flex flex-col justify-end text-white">
+                    <span class="text-3xl md:text-5xl font-black mb-2 md:mb-4">< 30s</span>
+                    <p class="text-[10px] md:text-xs font-bold uppercase">Processing Speed</p>
                 </div>
-                <div class="col-span-2 border-2 border-slate-900 bg-white p-8 hover-sharp transition-all">
-                    <h4 class="text-xl font-bold uppercase mb-4">Gemini AI Engine</h4>
-                    <p class="text-sm text-slate-600">Model tercanggih Google yang memastikan setiap variabel dalam jadwal Anda diinterpretasikan dengan benar tanpa kesalahan manusia.</p>
+                <div class="col-span-2 border-2 border-slate-900 bg-white p-5 md:p-8 hover-sharp transition-all">
+                    <h4 class="text-lg md:text-xl font-bold uppercase mb-2 md:mb-4">Gemini AI Engine</h4>
+                    <p class="text-xs md:text-sm text-slate-600 break-words">Model tercanggih Google yang memastikan setiap variabel dalam jadwal Anda diinterpretasikan dengan benar tanpa kesalahan manusia.</p>
                 </div>
             </div>
         </div>
@@ -156,12 +156,22 @@
         <div>
             <h2 class="text-4xl font-black uppercase tracking-tighter mb-8">Schedule<span class="blue-accent">AI</span></h2>
             <div class="flex gap-4">
-                <a href="#" class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">FB</a>
-                <a href="#" class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">IG</a>
-                <a href="#" class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">TW</a>
+                <a href="https://github.com/ichwalM" class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.601.11.818-.264.818-.592 0-.291-.011-1.06-.015-2.092-3.338.724-4.042-1.61-4.042-1.61-.546-1.392-1.334-1.768-1.334-1.768-1.09-.744.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.604-.015 2.898-.015 3.294 0 .329.215.701.828.588C20.584 21.81 24 17.306 24 12c0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/ichwal/" class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                    </svg>
+                </a>
+                <a href="https://app.walldev.my.id/" class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">
+                    <span class="text-[10px] font-bold">WWW</span>
+                </a>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-16 mt-12 md:mt-0">
             <div>
                 <h5 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Internal Links</h5>
                 <ul class="space-y-4 text-sm font-semibold uppercase">
@@ -172,7 +182,7 @@
             <div>
                 <h5 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Tech Stack</h5>
                 <ul class="space-y-2 text-xs font-mono text-slate-500">
-                    <li>LARAVEL 11</li>
+                    <li>LARAVEL 12</li>
                     <li>GOOGLE GEMINI AI</li>
                     <li>TAILWIND CSS</li>
                     <li>MYSQL PRIMARY</li>

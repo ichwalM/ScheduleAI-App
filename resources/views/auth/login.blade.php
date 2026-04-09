@@ -51,12 +51,12 @@
 
 {{-- ── NAV ── --}}
 <nav class="border-b-2 border-slate-900 bg-white">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 py-4 md:py-5 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0">
         <a href="{{ url('/') }}" class="flex items-center gap-3">
-            <img src="{{ asset('images/logo/logo.svg') }}" alt="ScheduleAI Logo" class="w-9 h-9 object-contain">
-            <span class="font-black text-xl tracking-tighter uppercase">ScheduleAI</span>
+            <img src="{{ asset('images/logo/logo.svg') }}" alt="ScheduleAI Logo" class="w-8 h-8 md:w-9 md:h-9 object-contain">
+            <span class="font-black text-lg md:text-xl tracking-tighter uppercase">ScheduleAI</span>
         </a>
-        <a href="{{ route('register') }}" class="text-[11px] font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">
+        <a href="{{ route('register') }}" class="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">
             Belum Punya Akun? Daftar →
         </a>
     </div>
