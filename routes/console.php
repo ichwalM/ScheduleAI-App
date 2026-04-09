@@ -10,4 +10,4 @@ Artisan::command('inspire', function () {
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::command('app:send-daily-reminders')
-    ->dailyAt('11:05');
+    ->dailyAt('11:15');
