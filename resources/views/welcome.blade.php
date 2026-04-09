@@ -63,7 +63,7 @@
             </div>
         </div>
         {{-- Right: Image --}}
-        <div class="relative min-w-0">
+        <div class="relative min-w-0 hidden lg:block ">
             <div class="border-2 border-slate-900 p-2 bg-white shadow-[8px_8px_0px_#0f172a]">
                 <img src="{{ asset('images/illustration/Ilustration1.webp') }}" alt="Student Documentation" class="w-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
             </div>
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="bg-white overflow-hidden">
-                <img src="{{ asset('images/documentations/schedules.png') }}" alt="Schedule Output" class="w-full h-48 md:h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
+                <img src="{{ asset('images/illustration/Ilustration4.webp') }}" alt="Schedule Output" class="w-full h-48 md:h-64 object-cover border-b-2 border-slate-900 filter saturate-50">
                 <div class="p-8">
                     <h3 class="text-xl font-bold uppercase mb-4">03. Rekomendasi Pintar</h3>
                     <p class="text-sm text-slate-600 leading-relaxed">Sistem memberikan saran optimasi berbasis Bahasa Indonesia, membantu mahasiswa memaksimalkan waktu perkuliahan mereka.</p>
@@ -183,10 +183,10 @@
             <div>
                 <h5 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Tech Stack</h5>
                 <ul class="space-y-2 text-xs font-mono text-slate-500">
-                    <li>LARAVEL 12</li>
-                    <li>GOOGLE GEMINI AI</li>
-                    <li>TAILWIND CSS</li>
-                    <li>MYSQL PRIMARY</li>
+                    <li><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"/></li>
+                    <li><img src="https://img.shields.io/badge/Google%20Gemini%20AI-4285F4?style=for-the-badge&logo=google&logoColor=white"/></li>
+                    <li><img src="https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/></li>
+                    <li><img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/></li>
                 </ul>
             </div>
         </div>
