@@ -27,6 +27,7 @@ class SendDailyReminders extends Command
     /**
      * Execute the console command.
      */
+    
     public function handle()
     {
         $this->info("Menjalankan Daily Reminder Checker...");
