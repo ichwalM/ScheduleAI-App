@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Paksa Laravel selalu menggunakan HTTPS untuk semua asset() dan route()
+        if (config('app.env') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 }
