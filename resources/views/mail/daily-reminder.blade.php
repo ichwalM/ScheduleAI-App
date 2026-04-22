@@ -45,7 +45,7 @@
 
 {{-- CTA Button --}}
 <div class="email-btn-wrap" style="text-align: center;">
-    @component('mail::button', ['url' => url('/student/dashboard')])
+    @component('mail::button', ['url' => 'https://schedule.walldev.my.id/student/dashboard'])
         Buka Dashboard
     @endcomponent
 </div>
