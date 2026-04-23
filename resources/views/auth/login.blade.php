@@ -96,12 +96,12 @@
         </div>
         <div class="border-t border-white/10 pt-10 flex flex-col gap-3">
             <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                © 2026 ScheduleAI — Built by <a href="https://app.walldev.my.id/" target="_blank" class="text-white hover:text-blue-400 hover:underline transition-all">Ichwal</a>.
+                © 2026 ScheduleAI — Built by <a href="https://walldev.my.id/" target="_blank" class="text-white hover:text-blue-400 hover:underline transition-all">Ichwal</a>.
             </p>
             <div class="flex gap-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                 <a href="https://github.com/ichwalM" target="_blank" class="hover:text-white transition-colors">GitHub</a>
                 <a href="https://www.linkedin.com/in/ichwal/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
-                <a href="https://app.walldev.my.id/" target="_blank" class="hover:text-white transition-colors">Portfolio</a>
+                <a href="https://walldev.my.id/" target="_blank" class="hover:text-white transition-colors">Portfolio</a>
             </div>
         </div>
     </div>
